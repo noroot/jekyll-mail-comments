@@ -1,0 +1,30 @@
+{% assign sorted = site.data.comments | sort  %}
+{%- for entry in sorted -%}
+
+{%- assign cid = entry[0] -%}
+{%- assign com = entry[1] -%}
+{%- assign indent_class = include.indent_class %}
+{%- assign title = include.title %}
+{%- if com.reply_to != include.replies_to -%}
+{%- continue -%}
+{%- endif -%}
+
+<div class="{{ indent_class }} comment" id="{{ cid }}">
+    <div class="d-flex">
+	<div><a href="" class="comment-author">{{ com.author | escape | strip_newlines }}</a> - <span class="comment-date"> {{ com.date | date_to_rfc822 }}</span></div>
+	<!-- <div class="ml-auto">at {{ com.date | date_to_rfc822 }}</div> -->
+    </div>
+    <div>
+	{{ com.text | escape | newline_to_br | strip_newlines | markdownify | replace: "&amp;#39;", "'" | replace: "&amp;quot;", '"' }}
+	
+	<!-- <div class="comment-controls">
+	     <a href="#{{cid}}">Permalink</a> | <a href="mailto:{{site.comments.email}}?subject=RE:{{cid}}:{{site.comments.subject_suffix}}:{{ page.path}}">Reply</a>
+	     </div> -->
+    </div>
+    <div class="d-flex">
+	<div class="ml-auto"><a href="#{{cid}}">Permalink</a> | <a href="mailto:{{site.comments.email}}?subject=RE:{{cid}}:{{site.comments.subject_suffix}}:{{title}}">Reply</a> </div>
+    </div>
+    {%- include comments.html replies_to=cid indent_class="ml-3 comment-indent" title=title -%}
+</div>
+
+{%- endfor -%}
