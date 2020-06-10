@@ -51,7 +51,7 @@ Here is how to you can include comments block into your Jekyll post template
 	    {% else %}
 	    <h2>No comments here yet <small class="text-muted">Write here gently</small></h2>
 	    {% endif %}
-	    <div class="mt-3"><a class="btn btn-outline-secondary btn-block" href="mailto:{{site.comments.email}}?subject=RE:{{page.path}}:{{site.comments.subject_suffix}}:{{post.title}}">Write a comment</a> </div>
+	    <div class="mt-3"><a class="btn btn-outline-secondary btn-block" href="mailto:{{site.comments.email}}?subject=RE:{{page.path}}:{{site.comments.subject_suffix}}:{{page.title}}">Write a comment</a> </div>
 	</section>
 ```
 Templates can be found inside **templates** directory of this gem.
